@@ -1,12 +1,12 @@
 package vidze.demo.Models;
 
 import java.time.LocalDateTime;
-import java.util.Map;
+import java.util.List;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "event")
+@Table(name = "events")
 public class Event {
     
     @Id
@@ -14,21 +14,42 @@ public class Event {
     @Column(name = "id")
     private int id;
 
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "date")
     private LocalDateTime date;
+
+    @Column(name = "duration")
     private String duration;
+
+    @Column(name = "accepted")
     private boolean accepted;
+
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "location_id")
     private Location location;
-    private Map<Integer, Artist> artists;
-    private Map<Integer, User> followers;
+    
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Artist> artists;
 
+    //Ver como funciona com padrao observer
+    private List<User> followers;
 
-    private Map<Integer, Ad> ads;
-    private Map<Integer, Ticket> tickets;
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Ad> ads;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Ticket> tickets;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "promoter_id", referencedColumnName = "id")
+    private Promoter promoter;
     
 
-
-    public Event(int id, String name, LocalDateTime date, String duration, boolean accepted, Location location, Map<Integer,Artist> artists, Map<Integer,User> followers, Map<Integer,Ad> ads, Map<Integer,Ticket> tickets) {
+    public Event(int id, String name, LocalDateTime date, String duration, boolean accepted, Location location, List<Artist> artists, List<User> followers, List<Ad> ads, List<Ticket> tickets) {
         this.id = id;
         this.name = name;
         this.date = date;
@@ -59,16 +80,16 @@ public class Event {
     public Location getLocation() {
         return this.location;
     }
-    public Map<Integer,Artist> getArtists() {
+    public List<Artist> getArtists() {
         return this.artists;
     }
-    public Map<Integer,User> getFollowers() {
+    public List<User> getFollowers() {
         return this.followers;
     }
-    public Map<Integer,Ad> getAds() {
+    public List<Ad> getAds() {
         return this.ads;
     }
-    public Map<Integer,Ticket> getTickets() {
+    public List<Ticket> getTickets() {
         return this.tickets;
     }
 
@@ -87,16 +108,16 @@ public class Event {
     public void setLocation(Location location) {
         this.location = location;
     }
-    public void setArtists(Map<Integer,Artist> artists) {
+    public void setArtists(List<Artist> artists) {
         this.artists = artists;
     }
-    public void setFollowers(Map<Integer,User> followers) {
+    public void setFollowers(List<User> followers) {
         this.followers = followers;
     }
-    public void setAds(Map<Integer,Ad> ads) {
+    public void setAds(List<Ad> ads) {
         this.ads = ads;
     }
-    public void setTickets(Map<Integer,Ticket> tickets) {
+    public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
     }
 }

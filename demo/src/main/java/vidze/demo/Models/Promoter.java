@@ -1,16 +1,29 @@
 package vidze.demo.Models;
 
-import java.util.Map;
+import java.util.List;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "promoters")
 public class Promoter {
     
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "password")
     private String password;
-    private Map<Integer, Event> events;
+
+    @OneToMany(mappedBy = "promoter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Event> events;
 
 
-    public Promoter(int id, String name, String password, Map<Integer, Event> events) {
+    public Promoter(int id, String name, String password, List<Event> events) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -26,7 +39,7 @@ public class Promoter {
     public String getPassword() {
         return this.password;
     }
-    public Map<Integer, Event> getEvents() {
+    public List<Event> getEvents() {
         return this.events;
     }
 
@@ -36,7 +49,7 @@ public class Promoter {
     public void setPassword(String password) {
         this.password = password;
     }
-    public void setEvents(Map<Integer, Event> events) {
+    public void setEvents(List<Event> events) {
         this.events = events;
     }
 

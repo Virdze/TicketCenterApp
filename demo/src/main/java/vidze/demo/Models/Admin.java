@@ -1,13 +1,23 @@
 package vidze.demo.Models;
 
-import java.util.Map;
+import java.util.List;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "admins")
 public class Admin {
-    private String name;
-    private String password;
-    private Map<Integer, Event> events;
 
-    public Admin(String name, String password, Map<Integer, Event> events) {
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "password")
+    private String password;
+    
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Event> events;
+
+    public Admin(String name, String password, List<Event> events) {
         this.name = name;
         this.password = password;
         this.events = events;
@@ -17,7 +27,7 @@ public class Admin {
     public String getName() {
         return this.name;
     }
-    public Map<Integer, Event> getEvents() {
+    public List<Event> getEvents() {
         return this.events;
     }
     public String getPassword() {
@@ -27,7 +37,7 @@ public class Admin {
     public void setName(String name) {
         this.name = name;
     }
-    public void setEvents(Map<Integer, Event> events) {
+    public void setEvents(List<Event> events) {
         this.events = events;
     }
     public void setPassword(String password) {

@@ -19,7 +19,7 @@ public class Ad implements Serializable {
     private int id;
 
     @Column(name = "date")
-    private Timestamp date;
+    private LocalDateTime date;
 
     @Column(name = "ticket")
     private String ticket;
@@ -36,7 +36,7 @@ public class Ad implements Serializable {
     private Event event;
 
 
-    public Ad(int id, Timestamp date, String ticket){
+    public Ad(int id, LocalDateTime date, String ticket){
         this.id = id;
         this.date = date;
         this.ticket = ticket;
@@ -44,14 +44,14 @@ public class Ad implements Serializable {
 
 
 
-    public Timestamp getDate() {
+    public LocalDateTime getDate() {
         return this.date;
     }
     public String getTicket() {
         return this.ticket;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
     public void setTicket(String ticket) {
