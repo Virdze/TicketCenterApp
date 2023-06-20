@@ -1,13 +1,19 @@
 package vidze.demo.Models;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Map;
 
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "event")
 public class Event {
     
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private int id;
+
     private String name;
     private LocalDateTime date;
     private String duration;
@@ -15,6 +21,8 @@ public class Event {
     private Location location;
     private Map<Integer, Artist> artists;
     private Map<Integer, User> followers;
+
+
     private Map<Integer, Ad> ads;
     private Map<Integer, Ticket> tickets;
     
