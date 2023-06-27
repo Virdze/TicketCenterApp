@@ -1,5 +1,7 @@
 package vidze.demo.Models;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,12 +15,17 @@ public class Ticket {
 
     @Column(name = "type")
     private String type;
+    @Column(name = "start_date")
+    private LocalDateTime start_date;
+
+    @Column(name = "end_date")
+    private LocalDateTime end_date;
 
     @Column(name = "price")
     private float price;
 
-    @Column(name = "range")
-    private float range;
+    @Column(name = "type_cost")
+    private float type_cost;
 
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -26,11 +33,11 @@ public class Ticket {
     private Event event;
 
 
-    public Ticket(int id, String type, float price, float range){
+    public Ticket(int id, String type, float price, float type_cost){
         this.id = id;
         this.type = type;
         this.price = price;
-        this.range = range;
+        this.type_cost = type_cost;
     }
 
     public String getType() {
@@ -39,8 +46,8 @@ public class Ticket {
     public float getPrice() {
         return this.price;
     }
-    public float getRange() {
-        return this.range;
+    public float getType_cost() {
+        return this.type_cost;
     }
 
     public void setType(String type) {
@@ -49,8 +56,8 @@ public class Ticket {
     public void setPrice(float price) {
         this.price = price;
     }
-    public void setRange(float range) {
-        this.range = range;
+    public void setType_cost(float type_cost) {
+        this.type_cost = type_cost;
     }
 
 }

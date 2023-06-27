@@ -1,16 +1,9 @@
 package vidze.demo.Models;
 
 import java.io.Serializable;
-import java.util.Map;
+import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -36,11 +29,17 @@ public class User implements Serializable{
     @Column(name = "phone")
     private int phone;
 
+    @Column(name = "role")
+    private Role role;
+
+    @Column(name = "language")
+    private String language;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Map<Integer,Ad> ads;
+    private List<Ad> ads;
 
     public User(){}
-    public User(int id, int age, String name, String email, String password, int phone, Map<Integer,Ad> ads) {
+    public User(int id, int age, String name, String email, String password, int phone, List<Ad> ads) {
         this.id = id;
         this.age = age;
         this.name = name;
@@ -67,7 +66,7 @@ public class User implements Serializable{
     public int getPhone() {
         return this.phone;
     }
-    public Map<Integer, Ad> getAds() {
+    public List<Ad> getAds() {
         return this.ads;
     }
 
@@ -88,7 +87,7 @@ public class User implements Serializable{
     public void setPhone(int phone) {
         this.phone = phone;
     }
-    public void setAds(Map<Integer, Ad> ads) {
+    public void setAds(List<Ad> ads) {
         this.ads = ads;
     }
 
