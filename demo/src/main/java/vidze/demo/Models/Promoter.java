@@ -25,26 +25,22 @@ public class Promoter {
     @Column(name = "language")
     private String language;
 
-    @OneToMany(mappedBy = "promoter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Column(name = "role")
+    private Role role;
+
+    @OneToMany(mappedBy = "promoter", cascade = CascadeType.ALL)
     private List<Event> events;
 
 
-    public Promoter(int id, String name, String email, String password, String language, List<Event> events) {
+
+    public Promoter(int id, String name, String email, String password, String language, Role role, List<Event> events) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.language = language;
+        this.role = role;
         this.events = events;
-    }
-
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -79,6 +75,14 @@ public class Promoter {
         this.language = language;
     }
 
+    public Role getRole() {
+        return this.role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     public List<Event> getEvents() {
         return this.events;
     }
@@ -86,5 +90,6 @@ public class Promoter {
     public void setEvents(List<Event> events) {
         this.events = events;
     }
+    
 
 }

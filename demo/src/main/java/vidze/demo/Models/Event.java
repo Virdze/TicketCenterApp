@@ -25,9 +25,6 @@ public class Event {
     @Column(name = "date_end")
     private LocalDateTime date_end;
 
-    @Column(name = "duration")
-    private String duration;
-
     @Column(name = "accepted")
     private boolean accepted;
 
@@ -39,46 +36,46 @@ public class Event {
     @JoinColumn(name = "location_id", referencedColumnName = "id")
     private Location location;
     
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Artist> artists;
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    private List<ArtistInEvent> artists;
 
-    //Ver como funciona com padrao observer
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<User> followers;
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    private List<EventFollowed> users_following;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    private List<EventSaved> users_saved;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<Ad> ads;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<Ticket> tickets;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "promoter_id", referencedColumnName = "id")
     private Promoter promoter;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "admin_id", referencedColumnName = "id")
     private Admin admin;
 
-    
 
-    public Event(int id, String name, LocalDateTime date_start, LocalDateTime date_end, String duration, boolean accepted, String image, Location location, List<Artist> artists, List<User> followers, List<Ad> ads, List<Ticket> tickets, Promoter promoter, Admin admin) {
+    public Event(int id, String name, LocalDateTime date_start, LocalDateTime date_end, boolean accepted, String image, Location location, List<ArtistInEvent> artists, List<EventFollowed> users_following, List<EventSaved> users_saved, List<Ad> ads, List<Ticket> tickets, Promoter promoter, Admin admin) {
         this.id = id;
         this.name = name;
         this.date_start = date_start;
         this.date_end = date_end;
-        this.duration = duration;
         this.accepted = accepted;
         this.image = image;
         this.location = location;
         this.artists = artists;
-        this.followers = followers;
+        this.users_following = users_following;
+        this.users_saved = users_saved;
         this.ads = ads;
         this.tickets = tickets;
         this.promoter = promoter;
         this.admin = admin;
     }
-
 
     public String getName() {
         return this.name;
@@ -102,14 +99,6 @@ public class Event {
 
     public void setDate_end(LocalDateTime date_end) {
         this.date_end = date_end;
-    }
-
-    public String getDuration() {
-        return this.duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
     }
 
     public boolean isAccepted() {
@@ -140,20 +129,28 @@ public class Event {
         this.location = location;
     }
 
-    public List<Artist> getArtists() {
+    public List<ArtistInEvent> getArtists() {
         return this.artists;
     }
 
-    public void setArtists(List<Artist> artists) {
+    public void setArtists(List<ArtistInEvent> artists) {
         this.artists = artists;
     }
 
-    public List<User> getFollowers() {
-        return this.followers;
+    public List<EventFollowed> getUsers_following() {
+        return this.users_following;
     }
 
-    public void setFollowers(List<User> followers) {
-        this.followers = followers;
+    public void setUsers_following(List<EventFollowed> users_following) {
+        this.users_following = users_following;
+    }
+
+    public List<EventSaved> getUsers_saved() {
+        return this.users_saved;
+    }
+
+    public void setUsers_saved(List<EventSaved> users_saved) {
+        this.users_saved = users_saved;
     }
 
     public List<Ad> getAds() {
@@ -187,6 +184,6 @@ public class Event {
     public void setAdmin(Admin admin) {
         this.admin = admin;
     }
-   
+
 
 }

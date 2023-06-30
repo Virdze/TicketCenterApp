@@ -31,20 +31,20 @@ public class Ad implements Serializable {
     @Column(name = "descripiton")
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "ticket_type_id", referencedColumnName = "id")
     private Ticket ticket_type;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
     private User buyer;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "event_id", referencedColumnName = "id")
     private Event event;
 

@@ -25,7 +25,7 @@ public class Admin {
     @Column(name = "role")
     private Role role;
     
-    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
     private List<Event> events;
 
     public Admin(int id, String name, String email, String password, Role role, List<Event> events) {
