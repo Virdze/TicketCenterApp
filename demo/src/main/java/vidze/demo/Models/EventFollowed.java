@@ -1,7 +1,6 @@
 package vidze.demo.Models;
 
 import jakarta.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "user_followed_event")
