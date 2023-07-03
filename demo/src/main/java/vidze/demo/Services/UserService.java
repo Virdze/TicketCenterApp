@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.var;
 import vidze.demo.Forms.Requests.RegiserUserRequest;
+import vidze.demo.Models.Role;
 import vidze.demo.Models.User;
 import vidze.demo.Repositories.UserRepo;
 
@@ -27,15 +29,18 @@ public class UserService{
             throw new IllegalStateException("User already exists");
         }
 
-        String name = request.getName();
-        String email = request.getEmail();
-        String password = request.getPassword();
-        int phone = request.getPhone();
-        int age = request.getAge();
+        
 
-        //Falta acrescentar o @Data em todos os models das entidades.
-        User user = new User();
-        user_repo.save(user);
+        var user = User.builder()
+                       .name(request.getName())
+                       .age(request.getAge())
+                       .email(request.getEmail())
+                       .password(request.getPassword())
+                       .phone(request.getPhone())
+                       .role(Role.USER)
+                       .language("english").build();
+        
+        this.user_repo.save(user);
     }
 
 }
