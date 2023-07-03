@@ -1,9 +1,13 @@
 package vidze.demo.Models;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.util.List;
+
 @Entity
-@Table(name = "artists")
+@Data
+@Table(name = "artist")
 public class Artist {
     
     @Id
@@ -16,30 +20,5 @@ public class Artist {
 
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
     private List<ArtistInEvent> event_list;
-
-
-    public Artist(int id, String name, List<ArtistInEvent> event_list) {
-        this.id = id;
-        this.name = name;
-        this.event_list = event_list;
-    }
-    
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<ArtistInEvent> getEvent_list() {
-        return this.event_list;
-    }
-
-    public void setEvent_list(List<ArtistInEvent> event_list) {
-        this.event_list = event_list;
-    }
-
 
 }

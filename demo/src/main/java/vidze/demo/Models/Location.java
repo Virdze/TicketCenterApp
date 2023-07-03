@@ -1,10 +1,13 @@
 package vidze.demo.Models;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.util.List;
 
 @Entity
-@Table(name = "locations")
+@Data
+@Table(name = "location")
 public class Location {
     
     @Id
