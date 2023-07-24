@@ -36,4 +36,10 @@ public class UserController {
     public List<String> removeUser(@RequestBody RemoveUserRequest request){
         return userService.removeUser(request);
     }
+
+    @GetMapping("/login")
+    public List<String> login(@RequestBody LoginRequest request){
+        return userService.login(request);
+    }
+
 }

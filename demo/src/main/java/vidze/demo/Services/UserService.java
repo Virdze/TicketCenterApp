@@ -54,4 +54,10 @@ public class UserService{
         else return List.of("state","error");
     }
 
+    public List<String> login(LoginRequest request){
+        Optional<User> u = user_repo.findUserByEmail(request.getEmail());
+        if(u.isPresent()) return List.of("state","ok");
+        else return List.of("state","error");
+    }
+
 }
