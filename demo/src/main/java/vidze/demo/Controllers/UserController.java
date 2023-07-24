@@ -11,8 +11,9 @@ import lombok.RequiredArgsConstructor;
 import vidze.demo.Services.UserService;
 import java.util.List;
 
-import vidze.demo.Forms.Requests.RegiserUserRequest;
-import vidze.demo.Models.User;
+import vidze.demo.Forms.Requests.*;
+import vidze.demo.Forms.Responses.*;
+import vidze.demo.Models.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,7 +28,12 @@ public class UserController {
     }
 
     @PostMapping("/registerUser")
-    public void registerUser(@RequestBody RegiserUserRequest request){
-        userService.registerUser(request);
+    public List<String> registerUser(@RequestBody RegiserUserRequest request){
+        return userService.registerUser(request);
+    }
+
+    @PostMapping("/removeUser")
+    public List<String> removeUser(@RequestBody RemoveUserRequest request){
+        return userService.removeUser(request);
     }
 }

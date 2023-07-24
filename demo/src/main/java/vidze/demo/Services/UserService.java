@@ -7,9 +7,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.var;
-import vidze.demo.Forms.Requests.RegiserUserRequest;
-import vidze.demo.Models.Role;
-import vidze.demo.Models.User;
+import vidze.demo.Forms.Requests.*;
+import vidze.demo.Models.*;
 import vidze.demo.Repositories.UserRepo;
 
 @Service
@@ -22,7 +21,7 @@ public class UserService{
         return user_repo.findAll();
     }
 
-    public void registerUser(RegiserUserRequest request){
+    public List<String> registerUser(RegiserUserRequest request){
         Optional<User> u = user_repo.findUserByEmail(request.getEmail());
         if(u.isPresent())
         {
@@ -41,6 +40,18 @@ public class UserService{
                        .language("english").build();
         
         this.user_repo.save(user);
+
+        return List.of("state","ok");
+    }
+
+    public List<String> removeUser(RemoveUserRequest request){
+        Optional<User> u = user_repo.findUserByEmail(request.getEmail());
+
+        if(u.isPresent()){
+            this.user_repo.delete(u.get());
+            return List.of("state","ok");
+        }
+        else return List.of("state","error");
     }
 
 }
