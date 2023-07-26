@@ -21,8 +21,8 @@ public class PromoterService {
     
     public List<String> registerPromoter(RegisterPromoterRequest request){
     
-        Optional<Promoter> u = promoter_repo.findPromoterByEmail(request.getEmail());
-        if(u.isPresent()) return List.of("state","email not valid!");
+        Optional<Promoter> p = promoter_repo.findPromoterByEmail(request.getEmail());
+        if(p.isPresent()) return List.of("state","email not valid!");
         var user = Promoter.builder()
                        .name(request.getName())
                        .email(request.getEmail())
@@ -32,9 +32,16 @@ public class PromoterService {
         
         this.promoter_repo.save(user);
 
-        return List.of("state","ok");
-    
-        
+        return List.of("state","ok");        
     } 
+
+    public List<String> loginPromoter(LoginRequest request){
+
+        Optional<Promoter> p = promoter_repo.findPromoterByEmail(request.getEmail());
+
+        if(p.isPresent()) return List.of("state", "ok");
+        else return List.of("state", "user doesn't exist!");
+        
+    }
 
 }

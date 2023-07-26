@@ -1,6 +1,7 @@
 package vidze.demo.Controllers;
 
 import vidze.demo.Forms.Requests.RegisterPromoterRequest;
+import vidze.demo.Forms.Requests.LoginRequest;
 import vidze.demo.Services.PromoterService;
 
 import java.util.List;
@@ -22,6 +23,11 @@ public class PromoterController {
     @PostMapping("/registerPromoter")
     public List<String> registerPromoter(@RequestBody RegisterPromoterRequest request) {
         return promoterService.registerPromoter(request);
+    }
+
+    @PostMapping("/loginPromoter")
+    public List<String> loginPromoter(@RequestBody LoginRequest request){
+        return promoterService.loginPromoter(request);
     }
 
 }
