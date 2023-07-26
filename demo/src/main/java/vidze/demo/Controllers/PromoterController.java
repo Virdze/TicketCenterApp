@@ -17,11 +17,11 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("api/v1/promoter")
 public class PromoterController {
     
-    private PromoterService promoterService;
+    private final PromoterService promoterService;
 
     @PostMapping("/registerPromoter")
     public List<String> registerPromoter(@RequestBody RegisterPromoterRequest request) {
-        return this.promoterService.registerPromoter(request);
+        return promoterService.registerPromoter(request);
     }
 
 }
