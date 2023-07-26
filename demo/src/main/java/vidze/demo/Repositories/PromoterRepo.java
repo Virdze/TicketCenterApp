@@ -9,3 +9,4 @@ import vidze.demo.Models.Promoter;
 public interface PromoterRepo extends JpaRepository<Promoter,Integer> {
     Optional<Promoter> findPromoterByEmail(String email);
 }
+    
