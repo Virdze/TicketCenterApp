@@ -1,6 +1,7 @@
 package vidze.demo.Controllers;
 
 import vidze.demo.Forms.Requests.RegisterPromoterRequest;
+import vidze.demo.Models.Promoter;
 import vidze.demo.Forms.Requests.LoginRequest;
 import vidze.demo.Services.PromoterService;
 
@@ -18,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("api/v1/promoter")
 public class PromoterController {
     
-    private final PromoterService promoterService;
+    private final PromoterService promoterService;    
 
     @PostMapping("/registerPromoter")
     public List<String> registerPromoter(@RequestBody RegisterPromoterRequest request) {

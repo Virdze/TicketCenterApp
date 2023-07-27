@@ -18,6 +18,10 @@ import lombok.RequiredArgsConstructor;
 public class PromoterService {
     
     private final PromoterRepo promoter_repo;
+
+    public List<Promoter> getPromoters() {
+        return promoter_repo.findAll();
+    }
     
     public List<String> registerPromoter(RegisterPromoterRequest request){
     
