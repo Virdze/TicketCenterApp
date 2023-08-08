@@ -1,0 +1,41 @@
+body {
+    background: linear-gradient(to bottom, #385170, #142d4c);
+    margin: 0px;
+    padding: 0px;
+}
+
+button {
+    border-radius: 10px;
+    padding: 10px 50px 10px 50px;
+    background-color: #9fd3c7;
+    color : white;
+    border: none;
+}
+
+.m-450 {
+    margin: 450px;
+}
+
+.mt-450 {
+    margin-top: 450px;
+}
+
+.p-18 {
+    padding: 18px;
+}
+
+.center { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-box {
+    border: 5px solid black;
+}
+
+.background-img{
+    position: absolute;
+    top:0px;
+    z-index: -500px;
+}
