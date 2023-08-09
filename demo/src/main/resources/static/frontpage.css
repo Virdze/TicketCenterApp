@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(to bottom, #385170, #142d4c);
+    background: radial-gradient(circle, #385170, #142d4c);
     margin: 0px;
     padding: 0px;
 }
@@ -31,7 +31,12 @@ button {
 }
 
 .login-box {
-    border: 5px solid black;
+    border: 5px solid #9ac2f744;
+    margin : 250px 175px 250px 175px;
+}
+
+.login.form {
+    margin: 260px 75px 260px 75px;
 }
 
 .background-img{
