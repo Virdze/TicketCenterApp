@@ -1,6 +1,5 @@
 package vidze.demo.Services;
 
-import vidze.demo.Forms.Requests.RegiserUserRequest;
 import vidze.demo.Models.Promoter;
 import vidze.demo.Models.Role;
 import vidze.demo.Repositories.PromoterRepo;

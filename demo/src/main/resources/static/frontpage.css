@@ -20,6 +20,18 @@ button {
     margin-top: 450px;
 }
 
+.mt-250 {
+    margin-top: 250px;
+}
+
+.mb-250 {
+    margin-bottom: 250px;
+}
+
+.m-2{
+    margin: 2px;
+}
+
 .p-18 {
     padding: 18px;
 }
