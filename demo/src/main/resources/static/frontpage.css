@@ -50,6 +50,8 @@ button {
     margin : 70px 175px 100px 175px;
 }
 
+
+
 .login.form {
     margin: 150px 75px 150px 75px;
 }
@@ -65,7 +67,7 @@ button {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(75deg, #3146d1, #e18309, #67c6ec);
+    background: linear-gradient(75deg, #385170, #142d4c, #449985);
     background-size: 300% 300%; 
     animation: flowyAnimation 10s infinite alternate;
     z-index: -500px;
