@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import lombok.var;
 import vidze.demo.Forms.Requests.*;
+import vidze.demo.Forms.Responses.AuthenticationResponse;
 import vidze.demo.Models.*;
 import vidze.demo.Repositories.UserRepo;
 
@@ -21,14 +22,14 @@ public class UserService{
         return user_repo.findAll();
     }
 
-    public List<String> registerUser(RegiserUserRequest request){
+    public AuthenticationResponse registerUser(RegiserUserRequest request){
         Optional<User> u = user_repo.findUserByEmail(request.getEmail());
         if(u.isPresent())
         {
-            throw new IllegalStateException("User already exists");
+            return AuthenticationResponse.builder()
+                   .status("User already exists")
+                   .build();
         }
-
-        
 
         var user = User.builder()
                        .name(request.getName())
@@ -41,7 +42,9 @@ public class UserService{
         
         this.user_repo.save(user);
 
-        return List.of("state","ok");
+        return AuthenticationResponse.builder()
+               .status("User created successfully")
+               .build();
     }
 
     public List<String> removeUser(RemoveUserRequest request){

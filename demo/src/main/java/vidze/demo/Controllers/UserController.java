@@ -1,5 +1,6 @@
 package vidze.demo.Controllers;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +12,7 @@ import vidze.demo.Services.UserService;
 import java.util.List;
 
 import vidze.demo.Forms.Requests.*;
+import vidze.demo.Forms.Responses.*;
 import vidze.demo.Models.*;
 
 @RestController
@@ -21,13 +23,13 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/getUsers")
-    public List<User> getUsers() {
+    public List<User> getUsers(){
         return userService.getUsers();
     }
 
     @PostMapping("/registerUser")
-    public List<String> registerUser(@RequestBody RegiserUserRequest request){
-        return userService.registerUser(request);
+    public ResponseEntity<AuthenticationResponse> registerUser(@RequestBody RegiserUserRequest request){
+        return ResponseEntity.ok(userService.registerUser(request));
     }
 
     @PostMapping("/removeUser")
