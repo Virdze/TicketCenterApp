@@ -1,11 +1,16 @@
 package vidze.demo.Services;
 
 import vidze.demo.Forms.Requests.RemovePromoterRequest;
+import vidze.demo.Forms.Responses.StatusResponse;
 import vidze.demo.Models.Admin;
 import vidze.demo.Models.Promoter;
 
+import org.apache.catalina.connector.Response;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import ch.qos.logback.core.status.Status;
 import lombok.RequiredArgsConstructor;
 import vidze.demo.Repositories.PromoterRepo;
 import vidze.demo.Repositories.AdminRepo;
@@ -28,13 +33,17 @@ public class AdminService {
         return promoter_repo.findAll();
     }
 
-    public List<String> removePromoter(RemovePromoterRequest request){
+    public ResponseEntity<StatusResponse> removePromoter(RemovePromoterRequest request){
         Optional<Promoter> p = promoter_repo.findPromoterByEmail(request.getEmail());
 
-        if(!p.isPresent()) return List.of("status","promoter doesn't exist.");
+        if(!p.isPresent()) return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                                                .body(StatusResponse.builder()
+                                                .status("Promoter doesn't exist")
+                                                .build());
 
         this.promoter_repo.delete(p.get());
-        return List.of("status","ok");
+        return ResponseEntity.ok(StatusResponse.builder()
+                             .status("ok")
+                             .build());
     }
-    
 }

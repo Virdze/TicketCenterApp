@@ -2,6 +2,7 @@ package vidze.demo.Controllers;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import vidze.demo.Forms.Requests.RemovePromoterRequest;
+import vidze.demo.Forms.Responses.StatusResponse;
 import vidze.demo.Models.Admin;
 import vidze.demo.Models.Promoter;
 import vidze.demo.Services.AdminService;
@@ -32,7 +34,7 @@ public class AdminController {
     }
 
     @PostMapping("/removePromoter")
-    public List<String> removePromoter(@RequestBody RemovePromoterRequest request){
+    public ResponseEntity<StatusResponse> removePromoter(@RequestBody RemovePromoterRequest request){
         return adminService.removePromoter(request);
     }
     
