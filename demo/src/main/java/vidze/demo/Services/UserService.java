@@ -3,12 +3,15 @@ package vidze.demo.Services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.var;
 import vidze.demo.Forms.Requests.*;
 import vidze.demo.Forms.Responses.AuthenticationResponse;
+import vidze.demo.Forms.Responses.StatusResponse;
 import vidze.demo.Models.*;
 import vidze.demo.Repositories.UserRepo;
 
@@ -22,13 +25,13 @@ public class UserService{
         return user_repo.findAll();
     }
 
-    public AuthenticationResponse registerUser(RegiserUserRequest request){
+    public ResponseEntity<StatusResponse> registerUser(RegiserUserRequest request){
         Optional<User> u = user_repo.findUserByEmail(request.getEmail());
         if(u.isPresent())
         {
-            return AuthenticationResponse.builder()
-                   .status("User already exists")
-                   .build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(StatusResponse.builder()
+                   .status("User already exists.")
+                   .build());
         }
 
         var user = User.builder()
@@ -42,25 +45,33 @@ public class UserService{
         
         this.user_repo.save(user);
 
-        return AuthenticationResponse.builder()
-               .status("User created successfully")
-               .build();
+        return ResponseEntity.ok(StatusResponse.builder()
+               .status("ok")
+               .build());
     }
 
-    public List<String> removeUser(RemoveUserRequest request){
+    public ResponseEntity<String> removeUser(RemoveUserRequest request){
         Optional<User> u = user_repo.findUserByEmail(request.getEmail());
 
         if(u.isPresent()){
             this.user_repo.delete(u.get());
-            return List.of("state","ok");
+            return ResponseEntity.ok("{\"status\" : \"ok\"}");
         }
-        else return List.of("state","error");
+        else return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                                  .body("{\"status\" : \"User doesn't exist.\"}");
     }
 
-    public List<String> login(LoginRequest request){
+    public ResponseEntity<AuthenticationResponse> login(LoginRequest request){
         Optional<User> u = user_repo.findUserByEmail(request.getEmail());
-        if(u.isPresent()) return List.of("state","ok");
-        else return List.of("state","error");
+
+        if(u.isPresent()) 
+            return ResponseEntity.ok(AuthenticationResponse.builder()
+            .status("ok")
+            .build());
+        else return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                                  .body(AuthenticationResponse.builder()
+                                  .status("Invalid Credentials.")
+                                  .build());
     }
 
 }

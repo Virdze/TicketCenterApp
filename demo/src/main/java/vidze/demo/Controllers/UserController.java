@@ -28,17 +28,17 @@ public class UserController {
     }
 
     @PostMapping("/registerUser")
-    public ResponseEntity<AuthenticationResponse> registerUser(@RequestBody RegiserUserRequest request){
-        return ResponseEntity.ok(userService.registerUser(request));
+    public ResponseEntity<StatusResponse> registerUser(@RequestBody RegiserUserRequest request){
+        return userService.registerUser(request);
     }
 
     @PostMapping("/removeUser")
-    public List<String> removeUser(@RequestBody RemoveUserRequest request){
+    public ResponseEntity<String> removeUser(@RequestBody RemoveUserRequest request){
         return userService.removeUser(request);
     }
 
     @GetMapping("/login")
-    public List<String> login(@RequestBody LoginRequest request){
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequest request){
         return userService.login(request);
     }
 
