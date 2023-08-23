@@ -3,15 +3,15 @@ document.getElementById("loginForm").addEventListener("submit", async function (
 
     const formData = new FormData(event.target);
     const data = {
-        username : formData.get("username"),
+        email : formData.get("email"),
         password : formData.get("password")
     };
 
     try{
-        const response = await fetch("api/v1/user", {
+        const response = await fetch("http://localhost:8080/api/v1/user/login", {
             method : "POST",
-            headers : {
-                "Content-Type" : "application/json",
+            headers: {
+                "Content-Type": "application/json",
             },
             body : JSON.stringify(data)
         });

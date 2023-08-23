@@ -64,10 +64,12 @@ public class UserService{
     public ResponseEntity<AuthenticationResponse> login(LoginRequest request){
         Optional<User> u = user_repo.findUserByEmail(request.getEmail());
 
-        if(u.isPresent()) 
+        if(u.isPresent()){
+            System.out.println("Got it");
             return ResponseEntity.ok(AuthenticationResponse.builder()
             .status("ok")
             .build());
+        }
         else return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                                   .body(AuthenticationResponse.builder()
                                   .status("Invalid Credentials.")
