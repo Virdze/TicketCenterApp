@@ -5,12 +5,10 @@ import vidze.demo.Forms.Responses.StatusResponse;
 import vidze.demo.Models.Admin;
 import vidze.demo.Models.Promoter;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import ch.qos.logback.core.status.Status;
 import lombok.RequiredArgsConstructor;
 import vidze.demo.Repositories.PromoterRepo;
 import vidze.demo.Repositories.AdminRepo;
