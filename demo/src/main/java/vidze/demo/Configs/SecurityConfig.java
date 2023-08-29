@@ -27,8 +27,11 @@ public class SecurityConfig {
             .disable()
             .authorizeHttpRequests()
             .requestMatchers(
-                "api/*/login",
-                "api/*/register"
+                "/api/v1/user/login",
+                "/api/v1/user/register",
+                "/api/v1/promoter/login",
+                "/api/v1/promoter/register",
+                "/api/v1/admin/login"
                 )
             .permitAll()
             .anyRequest()

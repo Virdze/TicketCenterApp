@@ -1,4 +1,4 @@
-package vidze.demo.Forms.Responses;
+package vidze.demo.Forms.Requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthenticationResponse {
-    private String token;
-    private String status;
-    private String userType;
+public class LoginAdminRequest {
+    private String email;
+    private String password;
+    private int id;
 }

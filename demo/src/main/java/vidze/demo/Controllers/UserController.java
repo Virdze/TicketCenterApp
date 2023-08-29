@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import vidze.demo.Services.AuthenticationService;
 import vidze.demo.Services.UserService;
 import java.util.List;
 
@@ -22,26 +23,23 @@ import vidze.demo.Models.*;
 @CrossOrigin
 public class UserController {
 
+    private final AuthenticationService authenticationService;
     private final UserService userService;
 
-    @GetMapping("/getUsers")
-    public List<User> getUsers(){
-        return userService.getUsers();
-    }
-
-    @PostMapping("/registerUser")
-    public ResponseEntity<StatusResponse> registerUser(@RequestBody RegiserUserRequest request){
-        return userService.registerUser(request);
-    }
-
-    @PostMapping("/removeUser")
-    public ResponseEntity<String> removeUser(@RequestBody RemoveUserRequest request){
-        return userService.removeUser(request);
+    @PostMapping("/register")
+    public ResponseEntity<AuthenticationResponse> registerUser(@RequestBody RegisterUserRequest request){
+        return authenticationService.register_user(request);
     }
 
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequest request){
-        return userService.login(request);
+        return authenticationService.login_user(request);
     }
+
+    @PostMapping("/remove")
+    public ResponseEntity<String> removeUser(@RequestBody RemoveUserRequest request){
+        return userService.removeUser(request);
+    }
+
 
 }

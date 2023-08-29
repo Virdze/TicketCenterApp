@@ -4,6 +4,7 @@ import vidze.demo.Forms.Requests.RemovePromoterRequest;
 import vidze.demo.Forms.Responses.StatusResponse;
 import vidze.demo.Models.Admin;
 import vidze.demo.Models.Promoter;
+import vidze.demo.Models.User;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import vidze.demo.Repositories.PromoterRepo;
+import vidze.demo.Repositories.UserRepo;
 import vidze.demo.Repositories.AdminRepo;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +24,7 @@ public class AdminService {
 
     private final AdminRepo admin_repo;
     private final PromoterRepo promoter_repo;
+    private final UserRepo user_repo;
 
     public List<Admin> getAdmins(){
         return admin_repo.findAll();
@@ -29,6 +32,10 @@ public class AdminService {
 
     public List<Promoter> getPromoters() {
         return promoter_repo.findAll();
+    }
+
+    public List<User> getUsers(){
+        return user_repo.findAll();
     }
 
     public ResponseEntity<StatusResponse> removePromoter(RemovePromoterRequest request){

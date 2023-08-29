@@ -25,40 +25,5 @@ public class PromoterService {
     public List<Promoter> getPromoters() {
         return promoter_repo.findAll();
     }
-    
-    public ResponseEntity<StatusResponse> registerPromoter(RegisterPromoterRequest request){
-    
-        Optional<Promoter> p = promoter_repo.findPromoterByEmail(request.getEmail());
-        if(p.isPresent()) return ResponseEntity.status(HttpStatus.CONFLICT)
-                                               .body(StatusResponse.builder()
-                                               .status("Promoter already exists")
-                                               .build());
-
-        var promoter = Promoter.builder()
-                       .name(request.getName())
-                       .email(request.getEmail())
-                       .password(request.getPassword())
-                       .role(Role.PROMOTER)
-                       .language("english").build();
-        
-        this.promoter_repo.save(promoter);
-
-        return ResponseEntity.ok(StatusResponse.builder()
-                             .status("ok")
-                             .build()); 
-    } 
-
-    public ResponseEntity<AuthenticationResponse> loginPromoter(LoginRequest request){
-
-        Optional<Promoter> p = promoter_repo.findPromoterByEmail(request.getEmail());
-
-        if(p.isPresent()) return ResponseEntity.ok(AuthenticationResponse.builder()
-                                               .status("ok")
-                                               .build());
-        else return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                                  .body(AuthenticationResponse.builder()
-                                  .status("Invalid Credentials")
-                                  .build());        
-    }
 
 }
