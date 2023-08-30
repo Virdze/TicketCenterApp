@@ -24,7 +24,7 @@ import vidze.demo.Services.AuthenticationService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "api/v1/admin")
+@RequestMapping(path = "/api/v1/admin")
 @CrossOrigin
 public class AdminController {
 

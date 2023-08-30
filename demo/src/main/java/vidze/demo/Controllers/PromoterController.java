@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "api/v1/promoter")
+@RequestMapping(path = "/api/v1/promoter")
 @CrossOrigin
 public class PromoterController {
     

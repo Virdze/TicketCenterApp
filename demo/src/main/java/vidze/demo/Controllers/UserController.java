@@ -19,7 +19,7 @@ import vidze.demo.Models.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "api/v1/user")
+@RequestMapping(path = "/api/v1/user")
 @CrossOrigin
 public class UserController {
 

@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class JWTService {
 
-    private static final String SECRET_KEY = "447CAA92965C3A1551C46B5E1A3E9";
+    private static final String SECRET_KEY = "f9793d397bf0380500db7c55c7fb032b99ed5f2219224e5092be3198370cb301";
 
 
     public String extractUsername(String token){
@@ -60,7 +60,7 @@ public class JWTService {
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails){
-        final String username = userDetails.getUsername();
+        final String username = extractUsername(token);
         return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
     }
 

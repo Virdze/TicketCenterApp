@@ -42,8 +42,7 @@ public class AuthenticationService {
         Optional<User> u = userRepo.findUserByEmail(request.getEmail());
 
         if(u.isPresent())
-            return ResponseEntity.status(HttpStatus.CONFLICT)
-                                 .body(AuthenticationResponse.builder()
+            return ResponseEntity.ok(AuthenticationResponse.builder()
                                        .status("User already exists.")
                                        .build());
         
